@@ -1,15 +1,115 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Skyuni</title>
+    <title>SkyUni</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">About</a></li>
+    <li><a href="#!">Expertise</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>1</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>2</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">Sign-Out</a></li>
+  </ul>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown2' class='dropdown-content'>
+    <li><a href="#!">About</a></li>
+    <li><a href="#!">Expertise</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i></a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i></a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">SignOut</a></li>
+  </ul>
+
+
+    <header>
+
+      <nav class="blue lighten-1 z-depth-2">
+        <div class="container">
+          <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">SkyUni</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="#">Courses</a></li>
+              <li><a href="#">Sign-Up</a></li>
+              <li><a href="#">Sign-In</a></li>
+              <!-- Dropdown Trigger 1-->
+              <a class='dropdown-trigger btn blue' href='#' data-target='dropdown1'>More</a>
+            </ul>
+
+            <ul class="sidenav" id="mobile-demo">
+              <li><a href="#">Courses</a></li>
+              <li><a href="#">Sign-Up</a></li>
+              <li><a href="#">Sign-In</a></li>
+              <!-- Dropdown Trigger 2-->
+              <a class='dropdown-trigger btn blue' href='#' data-target='dropdown2'>More</a>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    </header>
+
+   <main>
+    <div class="container">
+
+      <%= yield %>
+
+    </div>
+   </main>
+
+
+    <footer class="page-footer blue lighten-1">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">SkyUni</h5>
+              <p class="grey-text text-lighten-4">There is no failure in this world, there're only successful people and those who refuse to be successful. <br> Don't be the second.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5 class="white-text">Social</h5>
+              <ul>
+                <li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">LinkedIn</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2019 Copyright SkyUni
+          <%= link_to "About Us", pages_about_path, :class => "grey-text text-lighten-4 right" %>
+          </div>
+        </div>
+    </footer>
+
+
+    <script>
+
+      $(document).ready(function(){
+        $('.sidenav').sidenav();
+        $('.dropdown-trigger').dropdown();
+      });
+
+    </script>
+
   </body>
+
+
+
 </html>
