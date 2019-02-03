@@ -41,6 +41,7 @@ gem 'jquery-rails'
 gem 'material_icons'
 gem 'devise', '~> 4.2'
 gem 'toastr-rails'
+gem 'mandrill-api', '1.0.53', require: 'mandrill'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
