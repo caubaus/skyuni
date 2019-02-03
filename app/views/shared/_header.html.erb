@@ -1,0 +1,51 @@
+<header>
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">My Profile</a></li>
+    <li><a href="#!">My Courses</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>1</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>About</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+  </ul>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown2' class='dropdown-content'>
+    <li><a href="#!">My Profile</a></li>
+    <li><a href="#!">My Courses</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i></a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i></a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+  </ul>
+  <nav class="light-blue darken-4 z-depth-2">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">SkyUni</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Explore</a></li>
+          <% if(!user_signed_in?)%>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+          <% else %>
+            <!-- Dropdown Trigger 1-->
+            <a class='dropdown-trigger btn blue' href='#' data-target='dropdown1'><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
+          <% end %>
+        </ul>
+
+        <ul class="sidenav" id="mobile-demo">
+          <% if(!user_signed_in?)%>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+          <% else %>
+            <!-- Dropdown Trigger 1-->
+            <a class='dropdown-trigger btn blue' href='#' data-target='dropdown2'><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
+          <% end %>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+</header>
