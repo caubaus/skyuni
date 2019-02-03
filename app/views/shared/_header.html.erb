@@ -1,23 +1,25 @@
 <header>
+
   <!-- Dropdown Structure -->
   <ul id='dropdown1' class='dropdown-content'>
-    <li><a href="#!">My Profile</a></li>
-    <li><a href="#!">My Courses</a></li>
-    <li><a href="#!"><i class="material-icons">view_module</i>1</a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>About</a></li>
+    <li><%= link_to "Profile", edit_user_registration_path %></li>
+    <li><a href="#!"><i class="material-icons">class</i>Classes</a></li>
+    <li><a href="#!"><i class="material-icons">vibration</i>Tools</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>Help</a></li>
     <li class="divider" tabindex="-1"></li>
     <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
   </ul>
 
   <!-- Dropdown Structure -->
   <ul id='dropdown2' class='dropdown-content'>
-    <li><a href="#!">My Profile</a></li>
-    <li><a href="#!">My Courses</a></li>
-    <li><a href="#!"><i class="material-icons">view_module</i></a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i></a></li>
+    <li><%= link_to "Profile", edit_user_registration_path %></li>
+    <li><a href="#!"><i class="material-icons">class</i>Classes</a></li>
+    <li><a href="#!"><i class="material-icons">vibration</i>Tools</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i></a>Help</li>
     <li class="divider" tabindex="-1"></li>
     <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
   </ul>
+
   <nav class="light-blue darken-4 z-depth-2">
     <div class="container">
       <div class="nav-wrapper">
@@ -30,7 +32,9 @@
             <li><%= link_to "Sign In", new_user_session_path %></li>
           <% else %>
             <!-- Dropdown Trigger 1-->
-            <a class='dropdown-trigger btn blue' href='#' data-target='dropdown1'><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
+            <a class='dropdown-trigger blue valign-wrapper' href='#' data-target='dropdown1'>
+              <%= image_tag avatar_url(current_user), class: "circle responsive-img"%>&nbsp;
+              <%= current_user.name %><i class="material-icons right">arrow_drop_down</i></a>
           <% end %>
         </ul>
 
@@ -40,7 +44,9 @@
             <li><%= link_to "Sign In", new_user_session_path %></li>
           <% else %>
             <!-- Dropdown Trigger 1-->
-            <a class='dropdown-trigger btn blue' href='#' data-target='dropdown2'><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
+            <a class='dropdown-trigger blue valign-wrapper' href='#' data-target='dropdown2'>
+              <%= image_tag avatar_url(current_user), class: "circle responsive-img"%>&nbsp;
+              <%= current_user.name %><i class="material-icons right">arrow_drop_down</i></a>
           <% end %>
         </ul>
 
