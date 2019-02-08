@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'Admin @ SkyUni <no-reply@skyuni.com>'
+  config.mailer_sender = 'SkyUni <skyuni.info@gmail.com>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -287,4 +287,10 @@ Devise.setup do |config|
   # ActiveSupport.on_load(:devise_failure_app) do
   #   include Turbolinks::Controller
   # end
+
+  require 'omniauth-google-oauth2'
+  config.omniauth :google_oauth2, '1031937261944-dgme6ra1k6gfkmgchs4qtd5cupad65rf.apps.googleusercontent.com', 'qkCuUc7PbuUKlK89YHfkdvqM', {access_type: "offline", approval_prompt: ""}
+
+  require 'omniauth-facebook'
+  config.omniauth :facebook, '2194357827548085', 'cdb9e0006c6e8e8cc91e3f994057b97e', scope: 'public_profile,email', fields: 'email,name'
 end

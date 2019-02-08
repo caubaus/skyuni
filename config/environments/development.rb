@@ -62,12 +62,12 @@ Rails.application.configure do
   config.action_mailer.default_url_option = {host: 'localhost:3000'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.mandrilapp.com',
-    port: 578,
+    address: 'smtp.sendgrid.net',
+    port: 587,
     enable_starttls_auto: true,
     user_name: 'skyuni.info@gmail.com',
-    password: 'kPSO7QqwtPxqd1bxO_tQOQ',
-    authentication: 'login'
+    password: 'Sky9199==',
+    authentication: 'plain'
 
   }
 end
