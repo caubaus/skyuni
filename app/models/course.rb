@@ -9,4 +9,7 @@ class Course < ApplicationRecord
   has_attached_file :image, styles: { medium: "680x300>", thumb: "170x75>" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
+  has_attached_file :avatar, styles: { medium: "100x100>", thumb: "100x100>" }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
 end

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get 'pages/about'
 
-  root 'pages#about' #make home-page
+  root 'course#index' #make home-page
+
+  resources :course do
+    resources :lecture, only: [:show] #nested resouces
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

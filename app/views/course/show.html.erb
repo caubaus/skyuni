@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col m2">
+    <div class="card z-depth-2">
+      <div class="center">
+        <h1>$<%= @course.price %></h1>
+      </div>
+      <div class="card-action center">
+        <button class="btn waves-effect waves-light pink darken-2">
+          Enroll
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col m10">
+    <div class="card z-depth-2">
+      <div class="card-image">
+        <p><%= image_tag @course.image(:medium) %></p>
+        <span class="card-title"><%= @course.name %></span>
+      </div>
+
+      <div class="card horizontal">
+        <div class="card-profile">
+          <figure><%= image_tag @course.avatar(:medium) %></figure>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <a href="#" class="light-blue-text text-darken-4"><%= @course.instructor %></a>
+          </div>
+          <div class="card-action">
+            <a href="#" class="light-blue-text text-darken-4">Southern Sand University</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-content grey-text text-darken-4">
+        <h5>About This Course</h5>
+        <hr>
+        <p><%= @course.content %></p>
+
+        <h5>Syllabus - What you will achieve from this course</h5>
+        <hr>
+        <div class="collection">
+          <% @lectures.each do |lecture| %>
+            <% if lecture.header %>
+              <div class="collection-item light-blue darken-4 active">
+                <i class="material-icons">school</i>
+                <%= lecture.title %>
+              </div>
+            <% else %>
+              <%= link_to [lecture.course, lecture], class:"collection-item light-blue-text text-darken-4" do %>
+              <%= lecture.title %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <h5>About Southern Sand University</h5>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

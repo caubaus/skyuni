@@ -1,0 +1,66 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<div class="row">
+<br/>
+<% @courses.each do |course| %>
+  <%= link_to course do %>
+  <div class="col l4 m6 s12">
+    <div class="row">
+      <div class="col s12">
+        <div class="card x-large">
+
+          <div class="card-background waves-effect waves-block waves-light", style="height: 200px">
+            <%= image_tag course.image(:medium) %>
+          </div>
+
+          <div class="row ">
+
+              <div class="col l4 m4 s4">
+                <figure>
+                  <%= image_tag course.avatar(:medium), :class => "square" %>
+                </figure>
+              </div>
+
+          </div>
+
+          <div class="card-content">
+            <span class="card-title light-blue-text">
+              <%= course.name %>
+            </span>
+
+            <span class="card-title light-blue-text">
+              <%= course.instructor %>
+            </span>
+          </div>
+
+          <div>
+            <a href="#" class="halfway-fab btn-floating light-blue darken-4 pulse">
+              <i class="material-icons">favorite_border</i>
+            </a>
+          </div>
+
+          <div class="card-action">
+            <div class="row">
+              <a href="#">More Details</a>
+            </div>
+            <div class="action-icons float-right">
+              <i class="material-icons action-icon" role="button" title="Share">share</i>
+              <i class="material-icons action-icon activator" role="button" title="More options">more_vert</i>
+            </div>
+          </div>
+
+          <div class="card-reveal">
+            <div class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></div>
+            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+<% end %>
+</div>
