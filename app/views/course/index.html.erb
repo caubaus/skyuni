@@ -1,3 +1,6 @@
+<h1>Listing Courses</h1>
+<hr>
+
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -25,13 +28,15 @@
 
           </div>
 
-          <div class="card-content">
+          <div class="card-content" style="height: 10em">
             <span class="card-title light-blue-text">
               <%= course.name %>
             </span>
 
             <span class="card-title light-blue-text">
               <%= course.instructor %>
+              <br/>
+              <%= course.organization %>
             </span>
           </div>
 
@@ -43,7 +48,7 @@
 
           <div class="card-action">
             <div class="row">
-              <a href="#">More Details</a>
+              <a href="#" class="amber-text text-darken-4">Rating</a>
             </div>
             <div class="action-icons float-right">
               <i class="material-icons action-icon" role="button" title="Share">share</i>

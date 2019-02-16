@@ -1,5 +1,5 @@
 ActiveAdmin.register Course do
-  permit_params :name, :content, :price, :instructor, :image, :avatar
+  permit_params :name, :content, :price, :instructor, :organization, :image, :avatar
 
   show do |t|
     attributes_table do
@@ -7,6 +7,7 @@ ActiveAdmin.register Course do
         row :content
         row :price
         row :instructor
+        row :organization
         row :image do
           course.image? ? image_tag(course.image.url, height: '100') : content_tag(:span, "No Photo Yet")
         end
@@ -22,6 +23,7 @@ ActiveAdmin.register Course do
       f.input :content
       f.input :price
       f.input :instructor
+      f.input :organization
       f.input :image, hint: f.course.image? ? image_tag(course.image.url, height: '100') : content_tag(:span, "Upload jpg/png/gif image")
       f.input :avatar, hint: f.course.avatar? ? image_tag(course.avatar.url, height: '100') : content_tag(:span, "Upload jpg/png/gif avatar")
     end

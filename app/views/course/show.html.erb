@@ -1,13 +1,20 @@
+<h1><%= @course.name %></h1>
+<hr>
+<span>Offered by <%= @course.organization %></span>
+
 <div class="row">
   <div class="col m2">
     <div class="card z-depth-2">
       <div class="center">
-        <h1>$<%= @course.price %></h1>
+        <h1 class="light-blue-text text-darken-4">
+          $<%= @course.price %>
+        </h1>
       </div>
       <div class="card-action center">
-        <button class="btn waves-effect waves-light pink darken-2">
+        <button class="btn waves-effect waves-light amber darken-4">
           Enroll
         </button>
+        <span class="light-blue-text text-darken-4">Financing Options</span>
       </div>
     </div>
   </div>
@@ -25,10 +32,10 @@
         </div>
         <div class="card-stacked">
           <div class="card-content">
-            <a href="#" class="light-blue-text text-darken-4"><%= @course.instructor %></a>
+            <a href="#" class="amber-text text-darken-4"><%= @course.instructor %></a>
           </div>
           <div class="card-action">
-            <a href="#" class="light-blue-text text-darken-4">Southern Sand University</a>
+            <a href="#" class="amber-text text-darken-4"><%= @course.organization %></a>
           </div>
         </div>
       </div>
@@ -55,9 +62,18 @@
           <% end %>
         </div>
 
-        <h5>About Southern Sand University</h5>
+        <h5>About <%= @course.organization %> </h5>
         <hr>
+        <p><%= @course.content %></p>
+
+        <div class="">
+          <h5>Start Learning Now</h5>
+          <span class="light-blue-text text-darken-4">Financing Options</span>
+          <hr>
+        </div>
       </div>
+
+
     </div>
   </div>
 </div>
