@@ -5,11 +5,11 @@
         <div class="collection">
           <% @lectures.each do |lecture| %>
             <% if lecture.header %>
-              <div class="collection-item active">
+              <div class="collection-item light-blue darken-4 active">
                 <i class="material-icons">school</i> <%= lecture.title %>
               </div>
             <% else %>
-              <%= link_to [lecture.course, lecture], class:"collection-item" do %>
+              <%= link_to [lecture.course, lecture], class:"collection-item light-blue-text text-darken-4" do %>
                 <%= lecture.title %>
               <% end %>
             <% end %>
