@@ -1,11 +1,11 @@
-<div class="row">
-  <div class="col m4">
+<div class="row" data-no-turbolink="true">
+  <div class="col m3">
     <div class="card z-depth-2">
       <div class="card-content">
         <div class="collection">
           <% @lectures.each do |lecture| %>
             <% if lecture.header %>
-              <div class="collection-item light-blue darken-4 active">
+              <div class="collection-item white light-blue-text text-darken-4 active">
                 <i class="material-icons">school</i> <%= lecture.title %>
               </div>
             <% else %>
@@ -19,12 +19,38 @@
     </div>
   </div>
 
-  <div class="col m8">
+  <div class="col m9">
     <div class="card z-depth-2">
-      <div class="card-content">
-        <%= @lecture.video %>
+      <div id="wistia_<%= @lecture.video %>"> </div>
+
+      <div class="row">
+
+        <div class="col m6">
+          <% if !@prev_lecture.nil? %>
+            <%= link_to "Prev", [@prev_lecture.course, @prev_lecture], class:"btn btn-primary white grey-text" %>
+          <% else %>
+            &nbsp;
+          <% end %>
+        </div>
+
+        <div class="col m6">
+          <% if !@next_lecture.nil? %>
+            <span class="right">
+              <%= link_to "Next", [@next_lecture.course, @next_lecture], class:"btn btn-primary white grey-text" %>
+            </span>
+          <% end %>
+        </div>
+
       </div>
+
+
       <div class="card-action grey-text text-darken-4">
+        <button class="btn btn-primary white grey-text" onclick="setPlaySpeed(0.75)">0.75</button>
+        <button class="btn btn-primary white grey-text" onclick="setPlaySpeed(1)">1.00</button>
+        <button class="btn btn-primary white grey-text" onclick="setPlaySpeed(1.25)">1.25</button>
+        <button class="btn btn-primary white grey-text" onclick="setPlaySpeed(1.5)">1.50</button>
+        <button class="btn btn-primary white grey-text" onclick="setPlaySpeed(2)">2.00</button>
+
         <h5><%= @lecture.title %></h5>
         <hr>
         <%= markdown(@lecture.note) %>
@@ -32,3 +58,15 @@
     </div>
   </div>
 </div>
+
+
+<script src="https://fast.wistia.com/assets/external/E-v1.js"></script>
+<script>
+  wistiaEmbed = Wistia.embed("<%= @lecture.video %>", {
+    videoQuality: "hd-only",
+    videoFoam: true
+  });
+  function setPlaySpeed(speed) {
+    wistiaEmbed.playbackRate(speed);
+  }
+</script>

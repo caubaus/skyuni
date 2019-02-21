@@ -1,32 +1,35 @@
 <div class="row">
-    <div class="col m6 offset-m3 center">
+  <div class="col m3 center">
 
-      <h5 style="color: #01579b">Sign Up</h5>
+    <br><br>
+    <h5 style="color: #01579b">Sign Up</h5>
+    <br><br>
+
+        <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, class: "btn white red-text" %>
+        <%= link_to "Github", user_github_omniauth_authorize_path, class: "btn white black-text" %>
+        <%= link_to "Facebook", user_facebook_omniauth_authorize_path, class: "btn white blue-text" %>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render partial: "shared/devisemes" %>
+
+      <div class="input-field">
+        <%= f.text_field :name, autofocus: true, :class => "validate", :placeholder => "Name" %>
+      </div>
 
 
-          <%= link_to "Sign Up with Google", user_google_oauth2_omniauth_authorize_path, class: "btn red darken-2" %>
-          <%= link_to "Sign Up with Github", user_github_omniauth_authorize_path, class: "btn grey darken-4" %><br/><br/>
-          <%= link_to "Sign Up with Facebook", user_facebook_omniauth_authorize_path, class: "btn blue darken-4" %>
-    
+      <div class="input-field">
+        <%= f.email_field :email, :class => "validate", :placeholder => "Email" %>
+      </div>
 
+      <div class="input-field">
+        <%= f.password_field :password, autocomplete: "off", :class => "validate", :placeholder => "Password" %>
+      </div>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render partial: "shared/devisemes" %>
+      <button class="btn waves-effect waves-light white light-blue-text text-darken-4" type="submit" name="action">Sign Up</button>
+    <% end %>
+  </div>
 
-        <div class="input-field">
-          <%= f.text_field :name, autofocus: true, :class => "validate", :placeholder => "Name" %>
-        </div>
-
-
-        <div class="input-field">
-          <%= f.email_field :email, :class => "validate", :placeholder => "Email" %>
-        </div>
-
-        <div class="input-field">
-          <%= f.password_field :password, autocomplete: "off", :class => "validate", :placeholder => "Password" %>
-        </div>
-
-        <button class="btn waves-effect waves-light light-blue darken-4" type="submit" name="action">Sign Up</button>
-      <% end %>
-    </div>
+  <div class="col m9">
+    <script src="https://fast.wistia.com/embed/medias/kme60hjo5e.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_kme60hjo5e videoFoam=true" style="height:100%;position:relative;width:100%">&nbsp;</div></div></div>
+  </div>
 </div>

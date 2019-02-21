@@ -12,26 +12,21 @@
   <div class="col l4 m6 s12">
     <div class="row">
       <div class="col s12">
-        <div class="card x-large">
+        <div class="card x-large" id="profile-page-header">
 
-          <div class="card-background waves-effect waves-block waves-light", style="height: 200px">
-            <%= image_tag course.image(:medium) %>
-          </div>
+          <div class="card-image waves-effect waves-block waves-light">
+            <%= image_tag course.image(:medium), :alt => "user background", :class => "activator" %>
 
-          <div class="row ">
-
-              <div class="col l4 m4 s4">
-                <figure>
-                  <%= image_tag course.avatar(:medium), :class => "square" %>
-                </figure>
-              </div>
-
+            <figure class="card-profile-image">
+              <%= image_tag course.avatar(:medium), :alt => "profile image", :class => "circle z-depth-2 responsive-img activator" %>
+            </figure>
           </div>
 
           <div class="card-content" style="height: 10em">
             <span class="card-title light-blue-text">
-              <%= course.name %>
+              <%= course.shortname %>
             </span>
+            <hr>
 
             <span class="card-title light-blue-text">
               <%= course.instructor %>
@@ -69,3 +64,4 @@
 
 <% end %>
 </div>
+<br><br>

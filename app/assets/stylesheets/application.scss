@@ -10,9 +10,44 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    
+
 }
 
 main {
     flex: 1 0 auto;
+}
+
+.container {
+  min-width: 98%;
+  height: 100%;
+}
+
+.avatar-small {
+  width: 50px;
+}
+
+.avatar-medium {
+  width: 80px;
+}
+
+.mask {
+  z-index: 99;  
+}
+
+.row {
+  margin-bottom: 0px !important;
+}
+
+#profile-page-header .card-image {
+  height: 225px;
+}
+#profile-page-header .card-profile-image img {
+  width: 75px;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: inherit;
 }

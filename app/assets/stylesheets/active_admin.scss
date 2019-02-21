@@ -15,6 +15,9 @@ $skinLogo: none;
 
 @import "active_skin";
 
+@import "active_admin/sortable";
+
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
