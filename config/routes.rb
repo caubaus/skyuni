@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'pages/about'
   get '/mycourses' => 'course#list'
   post '/free' => 'charge#free' #when clicked, the ChargeController with the method free will be rendered
+  post '/pay' => 'charge#pay'
 
   root 'course#index' #make home-page
 

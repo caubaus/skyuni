@@ -14,16 +14,59 @@
         </h3>
       </div>
       <div class="card-action center">
-
         <% if user_signed_in? %>
-          <%= form_tag free_path do %>
+          <% if @course.price == 0 %>
+            <%= form_tag free_path do %>
+              <%= hidden_field_tag 'course_id', @course.id %>
+              <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
+                Enroll
+              </button>
+              <br><br>
+              <div class="light-blue-text text-darken-4">Financing Options</div>
+            <% end %>
+          <% else %>
+            <%= form_tag pay_path, id:'chargeForm' do %>
+            <script src="https://checkout.stripe.com/checkout.js"></script>
+            <%= hidden_field_tag 'stripeToken' %>
+            <%= hidden_field_tag 'stripeEmail' %>
             <%= hidden_field_tag 'course_id', @course.id %>
-            <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
-              Enroll
-            </button>
-            <br><br>
-            <div class="light-blue-text text-darken-4">Financing Options</div>
+
+            <button id="customButton" type="button" class="white orange-text">Enroll</button>
+
+            <script>
+            var handler = StripeCheckout.configure({
+              key: 'pk_test_JV5Jbg6B4HiINFxBZVAxFiZZ',
+              image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+              locale: 'auto',
+              token: function(token) {
+                $('#stripeToken').val(token.id);
+                $('#stripeEmail').val(token.email);
+                $('#chargeForm').submit();
+
+                // You can access the token ID with `token.id`.
+                // Get the token ID to your server-side code for use.
+              }
+            });
+
+            document.getElementById('customButton').addEventListener('click', function(e) {
+              // Open Checkout with further options:
+              handler.open({
+                name: 'SkyUni',
+                description: '<%= @course.name %>',
+                amount: <%= @course.price_in_cents %>
+              });
+              e.preventDefault();
+            });
+
+            // Close Checkout on page navigation:
+            window.addEventListener('popstate', function() {
+              handler.close();
+            });
+            </script>
+            <% end %>
           <% end %>
+
+
         <% else %>
           <%= link_to new_user_session_path do %>
             <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
