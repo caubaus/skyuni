@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_17_063239) do
+ActiveRecord::Schema.define(version: 2019_02_23_024050) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -74,13 +74,24 @@ ActiveRecord::Schema.define(version: 2019_02_17_063239) do
     t.text "note"
     t.string "video"
     t.boolean "header", default: false, null: false
-    t.string "tag"
+    t.integer "tag"
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["course_id"], name: "index_lectures_on_course_id"
     t.index ["slug"], name: "index_lectures_on_slug", unique: true
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "user_id"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.integer "star"
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "subcriptions", force: :cascade do |t|

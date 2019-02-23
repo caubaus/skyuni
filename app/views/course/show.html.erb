@@ -73,50 +73,95 @@
           <div class="card-content">
             <a href="#" class="amber-text text-darken-4"><%= @course.instructor %></a>
           </div>
+
           <div class="card-action">
             <a href="#" class="amber-text text-darken-4"><%= @course.organization %></a>
           </div>
         </div>
       </div>
 
-      <div class="card-content grey-text text-darken-4">
-        <h5>About This Course</h5>
-        <hr>
-        <p><%= @course.content %></p>
+      <div class="row">
+         <div class="col s12">
+           <ul class="tabs">
+             <li class="tab col s3"><a class="active" href="#about">About</a></li>
+             <li class="tab col s3"><a href="#lectures">Lectures</a></li>
+             <li class="tab col s3"><a href="#discussions">Discussions</a></li>
+             <li class="tab col s3"><a href="#relatedcourses">Related Courses</a></li>
+           </ul>
+         </div>
+          <div id="about" class="col s12">
+            <!-- About the courses -->
+            <div class="card-content grey-text text-darken-4">
+              <span id="average_rating"></span>
+              <p><%= @reviews.count %> <%= @reviews.count > 1? "Reviews" : "Review" %></p>
+              <hr>
 
-        <h5>Syllabus - What you will achieve from this course</h5>
-        <hr>
-        <div class="collection" data-no-turbolink="true">
-          <% @lectures.each do |lecture| %>
-            <% if lecture.header %>
-              <div class="collection-item light-blue darken-4 active">
-                <i class="material-icons">school</i>
-                <%= lecture.title %>
+              <h5>About This Course</h5>
+              <hr>
+              <p><%= @course.content %></p>
+
+              <h5>Syllabus - What you will achieve from this course</h5>
+              <hr>
+
+              Sylabus and rules
+
+              <h5>About <%= @course.organization %> </h5>
+              <hr>
+              <p><%= @course.content %></p>
+
+              <h5>About <%= @course.instructor %> </h5>
+              <hr>
+              <p><%= @course.content %></p>
+
+              <h5>Reviews & Comments</h5>
+              <div><%= render 'reviews/form' if @joined && !@hasReview %></div>
+              <div><%= render 'reviews/index' %></div>
+
+              <div class="">
+                <h5>Start Learning Now</h5>
+                <span class="light-blue-text text-darken-4">Financing Options</span>
+                <hr>
               </div>
-            <% else %>
-              <%= link_to [lecture.course, lecture], class:"collection-item light-blue-text text-darken-4" do %>
-              <%= lecture.title %>
+            </div>
+          </div>
+
+          <div id="lectures" class="col s10 offset-s1">
+            <!-- Lectures Videos -->
+            <div class="collection" data-no-turbolink="true">
+              <% @lectures.each do |lecture| %>
+                <% if lecture.header %>
+                  <div class="collection-item light-blue darken-4 active">
+                    <i class="material-icons">school</i>
+                    <%= lecture.title %>
+                  </div>
+                <% else %>
+                  <%= link_to [lecture.course, lecture], class:"collection-item light-blue-text text-darken-4" do %>
+                  <%= lecture.title %>
+                  <% end %>
+                <% end %>
               <% end %>
-            <% end %>
-          <% end %>
-        </div>
+            </div>
+          </div>
 
-        <h5>About <%= @course.organization %> </h5>
-        <hr>
-        <p><%= @course.content %></p>
+          <div id="discussions" class="col s12">
+            Discussions
+            <!-- Discussions here -->
+          </div>
 
-        <h5>About <%= @course.instructor %> </h5>
-        <hr>
-        <p><%= @course.content %></p>
-
-        <div class="">
-          <h5>Start Learning Now</h5>
-          <span class="light-blue-text text-darken-4">Financing Options</span>
-          <hr>
-        </div>
-      </div>
-
+          <div id="relatedcourses" class="col s12">
+            <!-- More courses here -->
+            Related Courses
+          </div>
+       </div>
 
     </div>
   </div>
 </div>
+
+<script>
+  $('#average_rating').raty({
+    path: '/assets',
+    readOnly: true,
+    score: <%= @course.average_rating %>
+  });
+</script>

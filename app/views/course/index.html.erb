@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<div class="row">
+<div class="row" data-no-turbolink="true">
 <br/>
 <% @courses.each do |course| %>
   <%= link_to course do %>
@@ -43,9 +43,12 @@
 
           <div class="card-action">
             <div class="row">
-              <a href="#" class="amber-text text-darken-4">Rating</a>
+
+
+
             </div>
             <div class="action-icons float-right">
+              Reviews
               <i class="material-icons action-icon" role="button" title="Share">share</i>
               <i class="material-icons action-icon activator" role="button" title="More options">more_vert</i>
             </div>
@@ -60,8 +63,8 @@
       </div>
     </div>
   </div>
-  <% end %>
 
+  <% end %>
 <% end %>
 </div>
 <br><br>

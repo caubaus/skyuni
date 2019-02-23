@@ -14,5 +14,9 @@ Rails.application.routes.draw do
   resources :course do
     resources :lecture, only: [:show] #nested resouces
   end
+
+  resources :course do
+    resources :reviews, only: [:create, :destroy]
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

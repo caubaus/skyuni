@@ -17,6 +17,10 @@ class CourseController < ApplicationController
     end
 
     @users = @course.users.order('created_at DESC').first(10)
+
+    @review = Review.new
+    @reviews = @course.reviews
+    @hasReview = @reviews.find_by(user_id: current_user.id) if current_user #current_user  has to be not nill
   end
 
   def list
