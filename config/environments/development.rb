@@ -66,7 +66,7 @@ Rails.application.configure do
     port: 587,
     enable_starttls_auto: true,
     user_name: 'skyuni.info@gmail.com',
-    password: 'Sky9199==',
+    password: ENV['MAILER_API_PASSWORD'],
     authentication: 'plain'
 
   }

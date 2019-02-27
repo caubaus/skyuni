@@ -59,6 +59,7 @@ gem "active_admin-sortable_tree", "~> 1.0.0"
 gem 'bourbon', '~> 4.0'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'stripe'
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 
 group :development, :test do

@@ -15,7 +15,7 @@ class Course < ApplicationRecord
   validates :instructor, presence: true, length: {maximum: 50}
   validates :organization, presence: true, length: {maximum: 50}
 
-  has_attached_file :image, styles: { medium: "480x200>", thumb: "170x75>" }
+  has_attached_file :image, styles: { medium: "500x400>", thumb: "170x75>" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   has_attached_file :avatar, styles: { medium: "100x100>", thumb: "75x75>" }

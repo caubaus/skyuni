@@ -289,12 +289,12 @@ Devise.setup do |config|
   # end
 
   require 'omniauth-google-oauth2'
-  config.omniauth :google_oauth2, '1031937261944-dgme6ra1k6gfkmgchs4qtd5cupad65rf.apps.googleusercontent.com', 'qkCuUc7PbuUKlK89YHfkdvqM', {access_type: "offline", approval_prompt: ""}
+  config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET'], {access_type: "offline", approval_prompt: ""}
 
   require 'omniauth-facebook'
-  config.omniauth :facebook, '2194357827548085', 'cdb9e0006c6e8e8cc91e3f994057b97e', scope: 'public_profile,email', fields: 'email,name'
+  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], scope: 'public_profile,email', fields: 'email,name'
 
   require 'omniauth-github'
-  config.omniauth :github, '358bb40727e6c5d28c88', '7e8d16f2dc9d4d469f24e7b79c8b783f04b694ec', scope: "user:email"
+  config.omniauth :github, ENV['GITHUB_APP_ID'], ENV['GITHUB_APP_SECRET'], scope: "user:email"
 
 end

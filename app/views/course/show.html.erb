@@ -35,7 +35,7 @@
 
             <script>
             var handler = StripeCheckout.configure({
-              key: 'pk_test_JV5Jbg6B4HiINFxBZVAxFiZZ',
+              key: '<%= ENV['STRIP_PUBLIC_KEY'] %>',
               image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
               locale: 'auto',
               token: function(token) {
@@ -103,33 +103,41 @@
 
   <div class="col m9">
     <div class="card z-depth-2">
-      <div class="card-image">
-        <p><%= image_tag @course.image(:medium) %></p>
-        <span class="card-title"><%= @course.name %></span>
-      </div>
-
-      <div class="card horizontal">
-        <div class="card-profile">
-          <figure><%= image_tag @course.avatar(:medium) %></figure>
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <a href="#" class="amber-text text-darken-4"><%= @course.instructor %></a>
-          </div>
-
-          <div class="card-action">
-            <a href="#" class="amber-text text-darken-4"><%= @course.organization %></a>
+      <div class="row">
+        <div class="col s6">
+          <div class="card-image">
+            <p><%= image_tag @course.image(:medium) %></p>
+            <span class="card-title"><%= @course.name %></span>
           </div>
         </div>
+
+        <div class="col s6">
+          <div class="card horizontal">
+            <div class="card-profile">
+              <figure><%= image_tag @course.avatar(:medium) %></figure>
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <a href="#" class="amber-text text-darken-4"><%= @course.instructor %></a>
+              </div>
+
+              <div class="card-action">
+                <a href="#" class="amber-text text-darken-4"><%= @course.organization %></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+
 
       <div class="row">
          <div class="col s12">
            <ul class="tabs">
-             <li class="tab col s3"><a class="active" href="#about">About</a></li>
-             <li class="tab col s3"><a href="#lectures">Lectures</a></li>
-             <li class="tab col s3"><a href="#discussions">Discussions</a></li>
-             <li class="tab col s3"><a href="#relatedcourses">Related Courses</a></li>
+             <li class="tab col s3"><a class="active amber-text text-darken-4" href="#about">About</a></li>
+             <li class="tab col s3"><a class="amber-text text-darken-4" href="#lectures">Lectures</a></li>
+             <li class="tab col s3"><a class="amber-text text-darken-4" href="#discussions">Discussions</a></li>
+             <li class="tab col s3"><a class="amber-text text-darken-4" href="#students">Enrolled Students</a></li>
            </ul>
          </div>
           <div id="about" class="col s12">
@@ -191,9 +199,28 @@
             <!-- Discussions here -->
           </div>
 
-          <div id="relatedcourses" class="col s12">
+          <div id="students" class="col s12">
             <!-- More courses here -->
-            Related Courses
+            <% if !@joined %>
+              You need to enroll in order to see enrolled students.
+            <% else %>
+
+            <div class="card-content center">
+              <%= image_tag avatar_url(current_user), class: "circle responsive-img avatar-medium" %> <br/>
+              <h5><%= current_user.name %></h5>
+            </div>
+
+            <div class="card-action center">
+              <% @users.each do |u| %>
+                <span class="valign-wrapper">
+                  <%= image_tag avatar_url(u), class: "circle responsive-img avatar-small" %>&nbsp;
+                  <%= u.name %>
+                </span><br/>
+              <% end %>
+            </div>
+
+            <% end %>
+
           </div>
        </div>
 
