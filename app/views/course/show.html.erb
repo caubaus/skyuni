@@ -1,108 +1,128 @@
-<h1><%= @course.name %></h1>
+<% content_for :head do %>
+  <title><%= @course.name %> | SkyUni </title>
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@skyuni">
+  <meta name="twitter:creator" content="@skyuni">
+  <meta name="twitter:title" content="<%= @course.name %>">
+  <meta name="twitter:description" content="<%= @course.content %>">
+  <meta name="twitter:image:src" content="<%= image_url @course.image %>">
+
+  <!-- Open Graph Data -->
+  <meta property="og:site_name" content="SkyUni">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= @course.name %>">
+  <meta property="og:description" content="<%= @course.content %>">
+  <meta property="og:image" content="<%= @course.image %>">
+
+<% end %>
+
+<h3><%= @course.name %></h3>
 <hr>
-<span>Offered by <%= @course.organization %></span>
+<h5>Offered by <%= @course.organization %></h5>
 
 <div class="row">
-  <div class="col m3 center">
-    <div class="card z-depth-2">
+    <!--  <div class="col m3 center">
+        <div class="card z-depth-2">
 
-      <% if !@joined %>
+          <% if !@joined %>
 
-      <div class="center">
-        <h3 class="light-blue-text text-darken-4">
-          <%= @course.price == 0? "Free" : "$#{@course.price}" %>
-        </h3>
-      </div>
-      <div class="card-action center">
-        <% if user_signed_in? %>
-          <% if @course.price == 0 %>
-            <%= form_tag free_path do %>
-              <%= hidden_field_tag 'course_id', @course.id %>
-              <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
-                Enroll
-              </button>
-              <br><br>
-              <div class="light-blue-text text-darken-4">Financing Options</div>
+          <div class="center">
+            <h3 class="light-blue-text text-darken-4">
+              <%= @course.price == 0? "Free" : "$#{@course.price}" %>
+            </h3>
+          </div>
+          <div class="card-action center">
+            <% if user_signed_in? %>
+              <% if @course.price == 0 %>
+                <%= form_tag free_path do %>
+                  <%= hidden_field_tag 'course_id', @course.id %>
+                  <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
+                    Enroll
+                  </button>
+                  <br><br>
+                  <div class="light-blue-text text-darken-4">Financing Options</div>
+                <% end %>
+              <% else %>
+                <%= form_tag pay_path, id:'chargeForm' do %>
+                <script src="https://checkout.stripe.com/checkout.js"></script>
+                <%= hidden_field_tag 'stripeToken' %>
+                <%= hidden_field_tag 'stripeEmail' %>
+                <%= hidden_field_tag 'course_id', @course.id %>
+
+                <button id="customButton" type="button" class="white orange-text">Enroll</button>
+
+                <script>
+                var handler = StripeCheckout.configure({
+                  key: '<%= ENV['STRIP_PUBLIC_KEY'] %>',
+                  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                  locale: 'auto',
+                  token: function(token) {
+                    $('#stripeToken').val(token.id);
+                    $('#stripeEmail').val(token.email);
+                    $('#chargeForm').submit();
+
+                    // You can access the token ID with `token.id`.
+                    // Get the token ID to your server-side code for use.
+                  }
+                });
+
+                document.getElementById('customButton').addEventListener('click', function(e) {
+                  // Open Checkout with further options:
+                  handler.open({
+                    name: 'SkyUni',
+                    description: '<%= @course.name %>',
+                    amount: <%= @course.price_in_cents %>
+                  });
+                  e.preventDefault();
+                });
+
+                // Close Checkout on page navigation:
+                window.addEventListener('popstate', function() {
+                  handler.close();
+                });
+                </script>
+                <% end %>
+              <% end %>
+
+
+            <% else %>
+              <%= link_to new_user_session_path do %>
+                <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
+                  Enroll
+                </button>
+                <br><br>
+                <span class="light-blue-text text-darken-4">Financing Options</span>
+              <% end %>
             <% end %>
+
+          </div>
+
           <% else %>
-            <%= form_tag pay_path, id:'chargeForm' do %>
-            <script src="https://checkout.stripe.com/checkout.js"></script>
-            <%= hidden_field_tag 'stripeToken' %>
-            <%= hidden_field_tag 'stripeEmail' %>
-            <%= hidden_field_tag 'course_id', @course.id %>
 
-            <button id="customButton" type="button" class="white orange-text">Enroll</button>
+          <div class="card-content center">
+            <%= image_tag avatar_url(current_user), class: "circle responsive-img avatar-medium" %> <br/>
+            <h5><%= current_user.name %></h5>
+          </div>
 
-            <script>
-            var handler = StripeCheckout.configure({
-              key: '<%= ENV['STRIP_PUBLIC_KEY'] %>',
-              image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-              locale: 'auto',
-              token: function(token) {
-                $('#stripeToken').val(token.id);
-                $('#stripeEmail').val(token.email);
-                $('#chargeForm').submit();
-
-                // You can access the token ID with `token.id`.
-                // Get the token ID to your server-side code for use.
-              }
-            });
-
-            document.getElementById('customButton').addEventListener('click', function(e) {
-              // Open Checkout with further options:
-              handler.open({
-                name: 'SkyUni',
-                description: '<%= @course.name %>',
-                amount: <%= @course.price_in_cents %>
-              });
-              e.preventDefault();
-            });
-
-            // Close Checkout on page navigation:
-            window.addEventListener('popstate', function() {
-              handler.close();
-            });
-            </script>
+          <div class="card-action center">
+            <% @users.each do |u| %>
+              <span class="valign-wrapper">
+                <%= image_tag avatar_url(u), class: "circle responsive-img avatar-small" %>&nbsp;
+                <%= u.name %>
+              </span><br/>
             <% end %>
+          </div>
+
           <% end %>
 
 
-        <% else %>
-          <%= link_to new_user_session_path do %>
-            <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
-              Enroll
-            </button>
-            <br><br>
-            <span class="light-blue-text text-darken-4">Financing Options</span>
-          <% end %>
-        <% end %>
+        </div>
+      </div> -->
 
-      </div>
-
-      <% else %>
-
-      <div class="card-content center">
-        <%= image_tag avatar_url(current_user), class: "circle responsive-img avatar-medium" %> <br/>
-        <h5><%= current_user.name %></h5>
-      </div>
-
-      <div class="card-action center">
-        <% @users.each do |u| %>
-          <span class="valign-wrapper">
-            <%= image_tag avatar_url(u), class: "circle responsive-img avatar-small" %>&nbsp;
-            <%= u.name %>
-          </span><br/>
-        <% end %>
-      </div>
-
-      <% end %>
-
-
-    </div>
-  </div>
-
-  <div class="col m9">
-    <div class="card z-depth-2">
+  <div class="col m10 offset-m1">
+    <div class="card z-depth-0">
       <div class="row">
         <div class="col s6">
           <div class="card-image">
@@ -112,32 +132,121 @@
         </div>
 
         <div class="col s6">
-          <div class="card horizontal">
+          <div class="card horizontal z-depth-0">
             <div class="card-profile">
               <figure><%= image_tag @course.avatar(:medium) %></figure>
             </div>
             <div class="card-stacked">
               <div class="card-content">
-                <a href="#" class="amber-text text-darken-4"><%= @course.instructor %></a>
+                <a href="#" class="orange-text text-darken-4"><%= @course.instructor %></a>
               </div>
 
               <div class="card-action">
-                <a href="#" class="amber-text text-darken-4"><%= @course.organization %></a>
+                <a href="#" class="orange-text text-darken-4"><%= @course.organization %></a>
               </div>
+
+              <div class="card-action">
+
+                <% if !@joined %>
+
+                <div class="center">
+                  <h3 class="light-blue-text text-darken-4">
+                    <%= @course.price == 0? "Free" : "$#{@course.price}" %>
+                  </h3>
+                </div>
+                <div class="card-action center">
+                  <% if user_signed_in? %>
+                    <% if @course.price == 0 %>
+                      <%= form_tag free_path do %>
+                        <%= hidden_field_tag 'course_id', @course.id %>
+                        <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
+                          Enroll
+                        </button>
+                        <br><br>
+                        <div class="light-blue-text text-darken-4">Financing Options</div>
+                      <% end %>
+                    <% else %>
+                      <%= form_tag pay_path, id:'chargeForm' do %>
+                      <script src="https://checkout.stripe.com/checkout.js"></script>
+                      <%= hidden_field_tag 'stripeToken' %>
+                      <%= hidden_field_tag 'stripeEmail' %>
+                      <%= hidden_field_tag 'course_id', @course.id %>
+
+                      <button id="customButton" type="button" class="white orange-text">Enroll</button>
+
+                      <script>
+                      var handler = StripeCheckout.configure({
+                        key: '<%= ENV['STRIP_PUBLIC_KEY'] %>',
+                        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                        locale: 'auto',
+                        token: function(token) {
+                          $('#stripeToken').val(token.id);
+                          $('#stripeEmail').val(token.email);
+                          $('#chargeForm').submit();
+
+                          // You can access the token ID with `token.id`.
+                          // Get the token ID to your server-side code for use.
+                        }
+                      });
+
+                      document.getElementById('customButton').addEventListener('click', function(e) {
+                        // Open Checkout with further options:
+                        handler.open({
+                          name: 'SkyUni',
+                          description: '<%= @course.name %>',
+                          amount: <%= @course.price_in_cents %>
+                        });
+                        e.preventDefault();
+                      });
+
+                      // Close Checkout on page navigation:
+                      window.addEventListener('popstate', function() {
+                        handler.close();
+                      });
+                      </script>
+                      <% end %>
+                    <% end %>
+
+
+                  <% else %>
+                    <%= link_to new_user_session_path do %>
+                      <button class="btn waves-effect waves-light white light-blue-text text-darken-4">
+                        Enroll
+                      </button>
+                      <br><br>
+                      <span class="light-blue-text text-darken-4">Financing Options</span>
+                    <% end %>
+                  <% end %>
+
+                </div>
+
+                <% else %>
+
+                <div class="card-content center">
+                  <%= image_tag avatar_url(current_user), class: "circle responsive-img avatar-medium" %> <br/>
+                  <h5><%= current_user.name %></h5>
+                </div>
+
+                <% end %>
+
+
+              </div>
+
             </div>
           </div>
+
+
+
         </div>
       </div>
-
-
 
       <div class="row">
          <div class="col s12">
            <ul class="tabs">
-             <li class="tab col s3"><a class="active amber-text text-darken-4" href="#about">About</a></li>
-             <li class="tab col s3"><a class="amber-text text-darken-4" href="#lectures">Lectures</a></li>
-             <li class="tab col s3"><a class="amber-text text-darken-4" href="#discussions">Discussions</a></li>
-             <li class="tab col s3"><a class="amber-text text-darken-4" href="#students">Enrolled Students</a></li>
+             <li class="tab col s3"><a class="active -text text-darken-4" href="#about">About</a></li>
+             <li class="tab col s3"><a class="orange-text text-darken-4" href="#lectures">Lectures</a></li>
+             <li class="tab col s3"><a class="orange-text text-darken-4" href="#discussions">Discussions</a></li>
+             <li class="tab col s3"><a class="orange-text text-darken-4" href="#students">Enrolled Students</a></li>
            </ul>
          </div>
           <div id="about" class="col s12">
@@ -145,24 +254,29 @@
             <div class="card-content grey-text text-darken-4">
               <span id="average_rating"></span>
               <p><%= @reviews.count %> <%= @reviews.count > 1? "Reviews" : "Review" %></p>
-              <hr>
 
+              <hr>
+              <div class="card">
+                Skills will be learned
+              </div>
               <h5>About This Course</h5>
               <hr>
-              <p><%= @course.content %></p>
+              <p><%= @course.content %></p> <!-- This will be course introduction -->
 
               <h5>Syllabus - What you will achieve from this course</h5>
+              Sylabus and rules
+              <p><%= @course.content %></p> <!-- This will be course Syllabus -->
               <hr>
 
-              Sylabus and rules
+
 
               <h5>About <%= @course.organization %> </h5>
               <hr>
-              <p><%= @course.content %></p>
+              <p><%= @course.content %></p> <!-- This will be information of course's organization -->
 
               <h5>About <%= @course.instructor %> </h5>
               <hr>
-              <p><%= @course.content %></p>
+              <p><%= @course.content %></p> <!-- This will be information of course's instructor -->
 
               <h5>Reviews & Comments</h5>
               <div><%= render 'reviews/form' if @joined && !@hasReview %></div>
@@ -181,12 +295,12 @@
             <div class="collection" data-no-turbolink="true">
               <% @lectures.each do |lecture| %>
                 <% if lecture.header %>
-                  <div class="collection-item light-blue darken-4 active">
+                  <div class="collection-item white orange-text text-darken-4 active">
                     <i class="material-icons">school</i>
                     <%= lecture.title %>
                   </div>
                 <% else %>
-                  <%= link_to [lecture.course, lecture], class:"collection-item light-blue-text text-darken-4" do %>
+                  <%= link_to [lecture.course, lecture], class:"collection-item grey-text text-darken-4" do %>
                   <%= lecture.title %>
                   <% end %>
                 <% end %>
@@ -194,15 +308,35 @@
             </div>
           </div>
 
-          <div id="discussions" class="col s12">
-            Discussions
+          <div id="discussions" class="col s10 offset-s1">
             <!-- Discussions here -->
+            <div id="disqus_thread"></div>
+              <script>
+              var disqus_identifier = '<%= @course.id %>';
+              /**
+              *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+              *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+              /*
+              var disqus_config = function () {
+              this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+              };
+              */
+              (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://http-localhost-3000-aog6rwb8hj.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+              })();
+              </script>
+              <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"></a></noscript>
+
           </div>
 
-          <div id="students" class="col s12">
-            <!-- More courses here -->
+          <div id="students" class="col s4">
+            <!-- Enrolled Students here -->
             <% if !@joined %>
-              You need to enroll in order to see enrolled students.
+              <h5>Enroll to see all students.</h5>
             <% else %>
 
             <div class="card-content center">

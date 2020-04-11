@@ -4,8 +4,8 @@
   <ul id='dropdown1' class='dropdown-content mask'>
     <li><%= link_to "Profile", edit_user_registration_path %></li>
     <li><%= link_to "My Courses", mycourses_path %></li>
-    <li><a href="#!"><i class="material-icons">vibration</i>Tools</a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>Help</a></li>
+    <li><a href="#!">Tools</a></li>
+    <li><a href="#!">Help</a></li>
     <li class="divider" tabindex="-1"></li>
     <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
   </ul>
@@ -14,8 +14,8 @@
   <ul id='dropdown2' class='dropdown-content mask'>
     <li><%= link_to "Profile", edit_user_registration_path %></li>
     <li><%= link_to "My Courses", mycourses_path %></li>
-    <li><a href="#!"><i class="material-icons">vibration</i>Tools</a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i></a>Help</li>
+    <li><a href="#!">Tools</a></li>
+    <li><a href="#!"></a>Help</li>
     <li class="divider" tabindex="-1"></li>
     <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
   </ul>
@@ -27,10 +27,12 @@
           <a href="#!" class="brand-logo">SkyUni</a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
+            <li><%= link_to "Introduction", pages_index_path %></li>
+            <li><%= link_to "About", pages_about_path %></li>
             <li><%= link_to "Explore", root_path %></li>
             <% if(!user_signed_in?)%>
               <li><%= link_to "Sign Up", new_user_registration_path %></li>
-              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Log In", new_user_session_path %></li>
             <% else %>
               <!-- Dropdown Trigger 1-->
               <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown1'>
@@ -42,7 +44,7 @@
           <ul class="sidenav" id="mobile-demo">
             <% if(!user_signed_in?)%>
               <li><%= link_to "Sign Up", new_user_registration_path %></li>
-              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Log In", new_user_session_path %></li>
             <% else %>
               <!-- Dropdown Trigger 1-->
               <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown2'>

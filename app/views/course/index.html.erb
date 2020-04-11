@@ -1,4 +1,4 @@
-<h1>Listing Courses</h1>
+<h3>Listing Courses</h3>
 <hr>
 
 <head>
@@ -18,28 +18,28 @@
             <%= image_tag course.image(:medium), :alt => "user background", :class => "activator" %>
 
             <figure class="card-profile-image">
-              <%= image_tag course.avatar(:medium), :alt => "profile image", :class => "circle z-depth-2 responsive-img activator" %>
+              <%= image_tag course.avatar(:medium), :alt => "profile image", :class => "circle z-depth-1 responsive-img activator" %>
             </figure>
           </div>
 
           <div class="card-content" style="height: 10em">
-            <span class="card-title light-blue-text">
+            <span class="card-title orange-text text-darken-4">
               <%= course.shortname %>
             </span>
             <hr>
 
-            <span class="card-title light-blue-text">
+            <span class="card-title grey-text text-darken-4">
               <%= course.instructor %>
               <br/>
-              <%= course.organization %>
+              <%= course.organization %> <!-- wil display organization's name tag -->
             </span>
           </div>
 
-          <div>
+          <!-- <div>
             <a href="#" class="halfway-fab btn-floating light-blue darken-4 pulse">
               <i class="material-icons">favorite_border</i>
             </a>
-          </div>
+          </div> -->
 
           <div class="card-action">
             <div class="row">
@@ -47,8 +47,10 @@
 
 
             </div>
-            <div class="action-icons float-right">
+            <div class="action-icons float-right orange-text text-darken-4">
               Reviews
+
+
               <i class="material-icons action-icon" role="button" title="Share">share</i>
               <i class="material-icons action-icon activator" role="button" title="More options">more_vert</i>
             </div>

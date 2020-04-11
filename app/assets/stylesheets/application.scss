@@ -7,18 +7,29 @@ $secondary-color: color("yellow", "base") !default;
 
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 main {
     flex: 1 0 auto;
 }
 
+h3 {
+ color: #e65100;
+}
+
+h5 {
+ color: #e65100;
+}
+
+hr {
+ color: #e1f5fe;
+}
+
 .container {
-  min-width: 98%;
+  min-width: 92%;
   height: 100%;
 }
 
@@ -31,7 +42,7 @@ main {
 }
 
 .mask {
-  z-index: 99;  
+  z-index: 99;
 }
 
 .row {
@@ -50,4 +61,12 @@ main {
   top: 0;
   bottom: 0;
   margin: inherit;
+}
+
+.collection {
+  margin: .5rem 0 1rem 0;
+  border: transparent !important;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
 }

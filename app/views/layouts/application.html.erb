@@ -11,6 +11,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <%= yield :head %>
+
+    <script async>(function(s,u,m,o,j,v){j=u.createElement(m);v=u.getElementsByTagName(m)[0];j.async=1;j.src=o;j.dataset.sumoSiteId='0c0dff535e0924f579b455bbadf5eafc95dfe9420a81ce3bea10ed35c47a91d0';v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');</script>
+
   </head>
 
   <body>

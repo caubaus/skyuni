@@ -6,6 +6,7 @@ Rails.application.routes.draw do
               :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
 
   get 'pages/about'
+  get 'pages/index'
   get '/mycourses' => 'course#list'
   post '/free' => 'charge#free' #when clicked, the ChargeController with the method free will be rendered
   post '/pay' => 'charge#pay'
